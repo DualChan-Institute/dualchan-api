@@ -1,5 +1,6 @@
 import type {FastifyInstance, FastifyReply, FastifyRequest} from 'fastify';
 import Fastify from 'fastify';
+import cors from '@fastify/cors';
 import type {BoardParams, ThreadParams, CommentsParams} from './types/Params';
 import {
   addBoard,
@@ -28,7 +29,6 @@ import {
 import type Comment from './types/Comment';
 
 const server: FastifyInstance = Fastify({logger: true});
-
 // boards routes
 const board = async (_req: FastifyRequest, _reply: FastifyReply) => {
   const {method} = _req;
@@ -113,6 +113,11 @@ const def = async (_req: FastifyRequest, _reply: FastifyReply) => {
 };
 
 const routes = async (fastify: FastifyInstance, _opts: any) => {
+  // cors
+  await fastify.register(cors, {
+    origin: '*',
+  });
+
   // / route
   fastify.get('/', def);
 

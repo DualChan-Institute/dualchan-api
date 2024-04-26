@@ -45,6 +45,8 @@ async function deleteRelation(id: string): Promise<boolean> {
       doc.data()?.value_collection === 'threads'
     ) {
       await db.collection('threads').doc(doc.data()?.value_id).delete();
+
+      deleteRelations(await getRelations('threads', doc.data()?.value_id));
     }
 
     // if key is thread and value is comment, delete the comment

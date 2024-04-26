@@ -44,6 +44,9 @@ async function addThread(
   const docRef = await db.collection('threads').add(thread);
   // overwrite the id with the generated id
   thread.id = docRef.id;
+
+  await db.collection('threads').doc(thread.id).set(thread);
+
   // add a relation from the board to the thread
   await addRelation('boards', boardId, 'threads', thread.id);
   return thread;

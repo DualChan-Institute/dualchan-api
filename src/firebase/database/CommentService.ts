@@ -48,6 +48,9 @@ async function addComment(
   const docRef = await db.collection('comments').add(comment);
   // overwrite the id with the generated id
   comment.id = docRef.id;
+
+  await db.collection('comments').doc(comment.id).set(comment);
+
   // add a relation from the thread to the comment
   await db.collection('relations').add({
     key_collection: 'threads',
