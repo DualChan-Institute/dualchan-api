@@ -1,20 +1,46 @@
-// eslint-disable-next-line eslint-comments/disable-enable-pair
-/* eslint-disable no-console */
-import fastify from 'fastify';
+import type {FastifyInstance, FastifyReply, FastifyRequest} from 'fastify';
+import Fastify from 'fastify';
+import {BoardParams, ThreadParams, CommentsParams} from './types/Params';
 
-// create a board
-import type Board from './types/Board';
+const server: FastifyInstance = Fastify({logger: true});
 
-const server = fastify();
-
-server.get('/ping', async (request, reply) => {
-  return 'pong\n';
+const mockPrivate = async (_req: FastifyRequest, _reply: FastifyReply) => ({
+  hello: 'private',
 });
 
-server.listen({port: 8080}, (err, address) => {
-  if (err) {
-    console.error(err);
+const routes = async (fastify: FastifyInstance, _opts: any) => {
+  // Boards
+  fastify.get('/api/boards', mockPrivate);
+  fastify.get('/api/boards/:id', mockPrivate);
+  fastify.post('/api/boards', mockPrivate);
+  fastify.put('/api/boards/:id', mockPrivate);
+  fastify.delete('/api/boards/:id', mockPrivate);
+
+  // Threads
+  fastify.get('/api/board/:boardId/threads', mockPrivate);
+  fastify.get('/api/board/:boardId/threads/:id', mockPrivate);
+  fastify.post('/api/board/:boardId/threads', mockPrivate);
+  fastify.put('/api/board/:boardId/threads/:id', mockPrivate);
+  fastify.delete('/api/board/:boardId/threads/:id', mockPrivate);
+
+  // Comments
+  fastify.get('/api/board/:boardId/thread/:threadId/comments', mockPrivate);
+  fastify.get('/api/board/:boardId/thread/:threadId/comments/:id', mockPrivate);
+  fastify.post('/api/board/:boardId/thread/:threadId/comments', mockPrivate);
+  fastify.put('/api/board/:boardId/thread/:threadId/comments/:id', mockPrivate);
+  fastify.delete(
+    '/api/board/:boardId/thread/:threadId/comments/:id',
+    mockPrivate,
+  );
+};
+
+server.register(routes);
+
+(async () => {
+  try {
+    await server.listen({port: 3000});
+  } catch (err) {
+    server.log.error(err);
     process.exit(1);
   }
-  console.log(`Server listening at ${address}`);
-});
+})();
