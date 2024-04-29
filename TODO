@@ -1,2 +1,5 @@
 - ADD PAGINATION
-- GET COMMENT Attribut board_id NEEDS TO BE DELETED
+- GIPHY BACKEND IMPLEMENTATION
+- IMPLEMENT MONGOOSE AS DATABSE
+
+Model (def. JSON etc.) --> Handler (annahme von Anfragen) <-- Service (Kommunikation mit Handler)
