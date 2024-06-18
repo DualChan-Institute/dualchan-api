@@ -10,6 +10,7 @@ import {
 } from './CommentService';
 import {IdZ} from '../generic/Id';
 import {CommentZ} from './Comment';
+import {authenticate} from '../auth/AuthHandler';
 
 /**
  * Definiert das Schema für Abfrageparameter, die beim Abrufen von Kommentaren verwendet werden.
@@ -20,7 +21,7 @@ import {CommentZ} from './Comment';
 const GetCommentsQueryZ = z
   .object({
     search: z.string().optional(),
-    parentId: z.string().optional(),
+    parentId: z.string(),
   })
   .and(PaginationNumberZ);
 
@@ -59,6 +60,8 @@ export async function getComment(req: FastifyRequest, reply: FastifyReply) {
  * Der aktualisierte Kommentar wird zurückgegeben.
  */
 export async function putComment(req: FastifyRequest, reply: FastifyReply) {
+  if (!(await authenticate(req, reply))) return;
+
   const {id} = IdZ.parse(req.params);
   const comment = CommentZ.parse(req.body);
   const newComment = await updateComment({id, comment});
@@ -73,6 +76,8 @@ export async function putComment(req: FastifyRequest, reply: FastifyReply) {
  * Der neu erstellte Kommentar wird zurückgegeben.
  */
 export async function postComment(req: FastifyRequest, reply: FastifyReply) {
+  if (!(await authenticate(req, reply))) return;
+
   const comment = CommentZ.parse(req.body);
   const newComment = await createComment({comment});
   reply.send(newComment);
@@ -86,6 +91,8 @@ export async function postComment(req: FastifyRequest, reply: FastifyReply) {
  * Der Kommentar wird gelöscht und die gelöschte Kommentar-ID wird zurückgegeben.
  */
 export async function deleteComment(req: FastifyRequest, reply: FastifyReply) {
+  if (!(await authenticate(req, reply))) return;
+
   const {id} = IdZ.parse(req.params);
   await removeComment({id});
   reply.send({id});

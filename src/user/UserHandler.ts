@@ -1,5 +1,5 @@
 import type {FastifyReply, FastifyRequest} from 'fastify';
-import {UserZ} from './User';
+import {PublicUserZ, UserZ} from './User';
 import {
   createUser,
   findUsers,
@@ -14,7 +14,7 @@ import {PaginationNumberZ} from '../generic/Pagination';
 import dotenv from 'dotenv';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import {authenticate} from '../auth/AuthHandler';
+import {authenticate, isAnonymUser} from '../auth/AuthHandler';
 import {AuthPayloadZ} from '../auth/Auth';
 import type {AuthPayload, AuthResponse} from '../auth/Auth';
 
@@ -109,8 +109,15 @@ const GetUsersQueryZ = z
  */
 export async function getUsers(req: FastifyRequest, reply: FastifyReply) {
   const query = GetUsersQueryZ.parse(req.query);
-  const res = await findUsers(query);
-  reply.send(res);
+  const users = await findUsers(query);
+  const publicUsers = users.map((user) => PublicUserZ.parse(user));
+
+  if (!isAnonymUser(req, reply)) {
+    reply.send(publicUsers);
+  } else {
+    if (!(await authenticate(req, reply, true))) return reply.send(publicUsers);
+    reply.send(users);
+  }
 }
 
 /**
@@ -123,7 +130,14 @@ export async function getUsers(req: FastifyRequest, reply: FastifyReply) {
 export async function getUser(req: FastifyRequest, reply: FastifyReply) {
   const {id} = z.object({id: z.string()}).parse(req.params);
   const user = await findUser({id});
-  reply.send(user);
+  const publicUser = PublicUserZ.parse(user);
+
+  if (!isAnonymUser(req, reply)) {
+    reply.send(publicUser);
+  } else {
+    if (!(await authenticate(req, reply, true))) return reply.send(publicUser);
+    reply.send(user);
+  }
 }
 
 /**
@@ -137,8 +151,13 @@ export async function getUser(req: FastifyRequest, reply: FastifyReply) {
 export async function putUser(req: FastifyRequest, reply: FastifyReply) {
   const {id} = z.object({id: z.string()}).parse(req.params);
   const user = UserZ.parse(req.body);
-  const updatedUser = await updateUser({id, user});
-  reply.send(updatedUser);
+
+  if (await isAnonymUser(req, reply)) {
+    if (!(await authenticate(req, reply))) return;
+  }
+
+  const newUser = await updateUser({id, user});
+  reply.send(newUser);
 }
 
 /**
@@ -163,9 +182,10 @@ export async function postUser(req: FastifyRequest, reply: FastifyReply) {
  * Der Benutzer wird gelöscht und die gelöschte Benutzer-ID wird zurückgegeben.
  */
 export async function deleteUser(req: FastifyRequest, reply: FastifyReply) {
+  const {id} = z.object({id: z.string()}).parse(req.params);
+
   if (!(await authenticate(req, reply))) return;
 
-  const {id} = z.object({id: z.string()}).parse(req.params);
   await removeUser({id});
   reply.send({id});
 }

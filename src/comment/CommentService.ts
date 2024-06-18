@@ -61,6 +61,11 @@ export async function findComment({
   id,
 }: FindCommentOptions): Promise<CommentDocument> {
   const doc = await db.collection('comments').doc(id).get();
+
+  if (!doc.exists) {
+    throw new Error(`Comment with id ${id} not found`);
+  }
+
   const data = doc.data() as CommentDocument;
   data.id = doc.id;
   return data;
@@ -116,5 +121,9 @@ export async function createComment({
  * @param id - Die ID des Kommentars, der gelöscht werden soll.
  */
 export async function removeComment({id}: FindCommentOptions): Promise<void> {
+  if (!(await findComment({id}))) {
+    throw new Error(`Comment with id ${id} not found`);
+  }
+
   await db.collection('comments').doc(id).delete();
 }

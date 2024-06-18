@@ -60,6 +60,8 @@ export async function getBoard(req: FastifyRequest, reply: FastifyReply) {
  * Das aktualisierte Board wird zurückgegeben.
  */
 export async function putBoard(req: FastifyRequest, reply: FastifyReply) {
+  if (!(await authenticate(req, reply))) return;
+
   const {id} = IdZ.parse(req.params);
   const board = BoardZ.parse(req.body);
   const newBoard = await updateBoard({id, board});
@@ -74,6 +76,8 @@ export async function putBoard(req: FastifyRequest, reply: FastifyReply) {
  * Das neu erstellte Board wird zurückgegeben.
  */
 export async function postBoard(req: FastifyRequest, reply: FastifyReply) {
+  if (!(await authenticate(req, reply))) return;
+
   const board = BoardZ.parse(req.body);
   const newBoard = await createBoard({board});
   reply.send(newBoard);

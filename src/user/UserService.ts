@@ -76,6 +76,11 @@ type FindUserOptions = {
  */
 export async function findUser({id}: FindUserOptions): Promise<UserDocument> {
   const doc = await db.collection('users').doc(id).get();
+
+  if (!doc.exists) {
+    throw new Error(`User with id ${id} not found`);
+  }
+
   const data = doc.data() as UserDocument;
   data.id = doc.id;
   return data;
@@ -133,6 +138,10 @@ export async function createUser({
  * @param id - Die ID des Benutzers, der gelöscht werden soll.
  */
 export async function removeUser({id}: FindUserOptions) {
+  if (!(await findUser({id}))) {
+    throw new Error(`User with id ${id} not found`);
+  }
+
   await db.collection('users').doc(id).delete();
 }
 

@@ -68,6 +68,11 @@ export async function findBoard({
   id,
 }: FindBoardOptions): Promise<BoardDocument> {
   const doc = await db.collection('boards').doc(id).get();
+
+  if (!doc.exists) {
+    throw new Error(`Board with id ${id} not found`);
+  }
+
   const data = doc.data() as BoardDocument;
   data.id = doc.id;
   return data;
@@ -93,6 +98,12 @@ export async function updateBoard({
   id,
   board,
 }: UpdateBoardOptions): Promise<BoardDocument> {
+  const existing = await findBoard({id});
+
+  if (!existing) {
+    throw new Error('Board not found');
+  }
+
   await db.collection('boards').doc(id).set(board);
   return findBoard({id});
 }
@@ -113,6 +124,12 @@ type CreateBoardOptions = {
 export async function createBoard({
   board,
 }: CreateBoardOptions): Promise<BoardDocument> {
+  const existing = await findBoards({slug: board.slug});
+
+  if (existing.length > 0) {
+    throw new Error('Board already exists');
+  }
+
   const newBoard = await db.collection('boards').add(board);
   const doc = await newBoard.get();
   return doc.data() as BoardDocument;
@@ -123,5 +140,9 @@ export async function createBoard({
  * @param id - Die ID des Boards, das gelöscht werden soll.
  */
 export async function removeBoard({id}: FindBoardOptions): Promise<void> {
+  if (!(await findBoard({id}))) {
+    throw new Error('Board not found');
+  }
+
   await db.collection('boards').doc(id).delete();
 }
