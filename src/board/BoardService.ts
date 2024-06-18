@@ -1,12 +1,28 @@
 import type {Board, BoardDocument} from './Board';
-import {db} from '../db';
+import {db} from '../lib/firebase/db';
 
+/**
+ * Definiert den Typ für die Optionen, die beim Abrufen von Boards verwendet werden.
+ * @property search - Optionaler Suchbegriff.
+ * @property slug - Optionaler Slug.
+ * @property limit - Optionale Begrenzung der Anzahl der zurückgegebenen Boards.
+ * @property offset - Optionale Offset zum Überspringen einer bestimmten Anzahl von Boards.
+ */
 type FindBoardsOptions = {
   search?: string;
   slug?: string;
   limit?: number;
   offset?: number;
 };
+
+/**
+ * Findet Boards basierend auf den bereitgestellten Optionen.
+ * @param search - Optionaler Suchbegriff.
+ * @param slug - Optionaler Slug.
+ * @param limit - Optionales Limit für die Anzahl der zurückgegebenen Boards.
+ * @param offset - Optionales Offset zum Überspringen einer bestimmten Anzahl von Boards.
+ * @returns Eine Liste von Board-Dokumenten.
+ */
 export async function findBoards({
   search,
   slug,
@@ -35,9 +51,19 @@ export async function findBoards({
   });
 }
 
+/**
+ * Definiert den Typ für die Optionen, die beim Abrufen eines einzelnen Boards verwendet werden.
+ * @property id - Die ID des Boards, das abgerufen werden soll.
+ */
 type FindBoardOptions = {
   id: string;
 };
+
+/**
+ * Findet ein einzelnes Board basierend auf der Board-ID.
+ * @param id - Die ID des Boards, das abgerufen werden soll.
+ * @returns Das Board-Dokument.
+ */
 export async function findBoard({
   id,
 }: FindBoardOptions): Promise<BoardDocument> {
@@ -47,10 +73,22 @@ export async function findBoard({
   return data;
 }
 
+/**
+ * Definiert den Typ für die Optionen, die beim Aktualisieren eines Boards verwendet werden.
+ * @property id - Die ID des Boards, das aktualisiert werden soll.
+ * @property board - Die neuen Board-Daten.
+ */
 type UpdateBoardOptions = {
   id: string;
   board: Board | BoardDocument;
 };
+
+/**
+ * Aktualisiert die Informationen eines bestehenden Boards.
+ * @param id - Die ID des Boards, das aktualisiert werden soll.
+ * @param board - Die neuen Board-Daten.
+ * @returns Das aktualisierte Board-Dokument.
+ */
 export async function updateBoard({
   id,
   board,
@@ -59,9 +97,19 @@ export async function updateBoard({
   return findBoard({id});
 }
 
+/**
+ * Definiert den Typ für die Optionen, die beim Erstellen eines neuen Boards verwendet werden.
+ * @property board - Die Daten des neuen Boards.
+ */
 type CreateBoardOptions = {
   board: Board;
 };
+
+/**
+ * Erstellt ein neues Board.
+ * @param board - Die Daten des neuen Boards.
+ * @returns Das neu erstellte Board-Dokument.
+ */
 export async function createBoard({
   board,
 }: CreateBoardOptions): Promise<BoardDocument> {
@@ -70,6 +118,10 @@ export async function createBoard({
   return doc.data() as BoardDocument;
 }
 
+/**
+ * Löscht ein Board basierend auf der Board-ID.
+ * @param id - Die ID des Boards, das gelöscht werden soll.
+ */
 export async function removeBoard({id}: FindBoardOptions): Promise<void> {
   await db.collection('boards').doc(id).delete();
 }
