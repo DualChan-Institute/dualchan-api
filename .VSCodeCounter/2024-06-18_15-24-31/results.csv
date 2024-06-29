@@ -1,0 +1,23 @@
+"filename", "language", "TypeScript", "Properties", "JSON with Comments", "JSON", "Markdown", "comment", "blank", "total"
+"/Users/timwestphal/kikumo seite/kikumo/dualchan-api/.env", "Properties", 0, 32, 0, 0, 0, 0, 0, 32
+"/Users/timwestphal/kikumo seite/kikumo/dualchan-api/README.md", "Markdown", 0, 0, 0, 0, 51, 0, 26, 77
+"/Users/timwestphal/kikumo seite/kikumo/dualchan-api/firebase_auth.json", "JSON", 0, 0, 0, 13, 0, 0, 1, 14
+"/Users/timwestphal/kikumo seite/kikumo/dualchan-api/package-lock.json", "JSON", 0, 0, 0, 3508, 0, 0, 1, 3509
+"/Users/timwestphal/kikumo seite/kikumo/dualchan-api/package.json", "JSON", 0, 0, 0, 36, 0, 0, 1, 37
+"/Users/timwestphal/kikumo seite/kikumo/dualchan-api/src/auth/Auth.ts", "TypeScript", 10, 0, 0, 0, 0, 9, 4, 23
+"/Users/timwestphal/kikumo seite/kikumo/dualchan-api/src/auth/AuthHandler.ts", "TypeScript", 31, 0, 0, 0, 0, 19, 7, 57
+"/Users/timwestphal/kikumo seite/kikumo/dualchan-api/src/board/Board.ts", "TypeScript", 10, 0, 0, 0, 0, 16, 5, 31
+"/Users/timwestphal/kikumo seite/kikumo/dualchan-api/src/board/BoardService.ts", "TypeScript", 84, 0, 0, 0, 0, 48, 17, 149
+"/Users/timwestphal/kikumo seite/kikumo/dualchan-api/src/board/boardHandler.ts", "TypeScript", 48, 0, 0, 0, 0, 43, 10, 101
+"/Users/timwestphal/kikumo seite/kikumo/dualchan-api/src/comment/Comment.ts", "TypeScript", 11, 0, 0, 0, 0, 18, 5, 34
+"/Users/timwestphal/kikumo seite/kikumo/dualchan-api/src/comment/CommentService.ts", "TypeScript", 71, 0, 0, 0, 0, 46, 13, 130
+"/Users/timwestphal/kikumo seite/kikumo/dualchan-api/src/comment/commentHandler.ts", "TypeScript", 48, 0, 0, 0, 0, 42, 10, 100
+"/Users/timwestphal/kikumo seite/kikumo/dualchan-api/src/generic/Id.ts", "TypeScript", 4, 0, 0, 0, 0, 4, 2, 10
+"/Users/timwestphal/kikumo seite/kikumo/dualchan-api/src/generic/Pagination.ts", "TypeScript", 11, 0, 0, 0, 0, 12, 3, 26
+"/Users/timwestphal/kikumo seite/kikumo/dualchan-api/src/index.ts", "TypeScript", 68, 0, 0, 0, 0, 47, 12, 127
+"/Users/timwestphal/kikumo seite/kikumo/dualchan-api/src/lib/firebase/db.ts", "TypeScript", 8, 0, 0, 0, 0, 2, 3, 13
+"/Users/timwestphal/kikumo seite/kikumo/dualchan-api/src/user/User.ts", "TypeScript", 12, 0, 0, 0, 0, 26, 7, 45
+"/Users/timwestphal/kikumo seite/kikumo/dualchan-api/src/user/UserHandler.ts", "TypeScript", 100, 0, 0, 0, 0, 69, 23, 192
+"/Users/timwestphal/kikumo seite/kikumo/dualchan-api/src/user/UserService.ts", "TypeScript", 88, 0, 0, 0, 0, 57, 16, 161
+"/Users/timwestphal/kikumo seite/kikumo/dualchan-api/tsconfig.json", "JSON with Comments", 0, 0, 11, 0, 0, 90, 9, 110
+"Total", "-", 604, 32, 11, 3557, 51, 548, 175, 4978

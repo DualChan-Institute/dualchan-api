@@ -18,7 +18,7 @@ const JWT_SECRET = process.env.JWT_SECRET || null;
  * @property limit - Optionale Begrenzung der Anzahl der zurückgegebenen Benutzer.
  * @property offset - Optionale Offset zum Überspringen einer bestimmten Anzahl von Benutzern.
  */
-type FindUsersOptions = {
+export type FindUsersOptions = {
   search?: string;
   email?: string;
   limit?: number;

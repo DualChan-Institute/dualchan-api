@@ -9,7 +9,7 @@ import {IdZ} from '../generic/Id';
  * - password: Ein Passwort, das mindestens 6 Zeichen lang ist (string).
  */
 export const UserZ = z.object({
-  username: z.string().optional(),
+  username: z.string(),
   email: z.string().email(),
   password: z.string().min(6),
 });

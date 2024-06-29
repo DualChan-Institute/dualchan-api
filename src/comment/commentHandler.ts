@@ -76,11 +76,18 @@ export async function putComment(req: FastifyRequest, reply: FastifyReply) {
  * Der neu erstellte Kommentar wird zurückgegeben.
  */
 export async function postComment(req: FastifyRequest, reply: FastifyReply) {
-  if (!(await authenticate(req, reply))) return;
-
-  const comment = CommentZ.parse(req.body);
-  const newComment = await createComment({comment});
-  reply.send(newComment);
+  if (await authenticate(req, reply, true)) {
+    // AUTHENTICATED
+    const comment = CommentZ.parse(req.body);
+    const newComment = await createComment({comment});
+    reply.send(newComment);
+  } else {
+    // ANONYMOUS
+    const comment = CommentZ.parse(req.body);
+    comment.userId = '-1';
+    const newComment = await createComment({comment});
+    reply.send(newComment);
+  }
 }
 
 /**

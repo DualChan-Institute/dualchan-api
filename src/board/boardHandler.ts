@@ -10,7 +10,7 @@ import {
 } from './BoardService';
 import {IdZ} from '../generic/Id';
 import {BoardZ} from './Board';
-import {authenticate} from '../auth/AuthHandler';
+import {authenticate, authenticateAdmin} from '../auth/AuthHandler';
 
 /**
  * Definiert das Schema für Abfrageparameter, die beim Abrufen von Boards verwendet werden.
@@ -76,7 +76,7 @@ export async function putBoard(req: FastifyRequest, reply: FastifyReply) {
  * Das neu erstellte Board wird zurückgegeben.
  */
 export async function postBoard(req: FastifyRequest, reply: FastifyReply) {
-  if (!(await authenticate(req, reply))) return;
+  if (!(await authenticateAdmin(req, reply))) return;
 
   const board = BoardZ.parse(req.body);
   const newBoard = await createBoard({board});
@@ -92,7 +92,7 @@ export async function postBoard(req: FastifyRequest, reply: FastifyReply) {
  * Das Board wird gelöscht und die gelöschte Board-ID wird zurückgegeben.
  */
 export async function deleteBoard(req: FastifyRequest, reply: FastifyReply) {
-  if (!(await authenticate(req, reply))) return;
+  if (!(await authenticateAdmin(req, reply))) return;
 
   const {id} = IdZ.parse(req.params);
   await removeBoard({id});

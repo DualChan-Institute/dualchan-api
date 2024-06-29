@@ -11,7 +11,7 @@ import {IdZ} from '../generic/Id';
  */
 export const CommentZ = z.object({
   parentId: z.string(),
-  authorId: z.string(),
+  userId: z.string(),
   title: z.string().optional(),
   text: z.string(),
 });

@@ -1,0 +1,59 @@
+Date : 2024-06-18 15:24:31
+Directory : /Users/timwestphal/kikumo seite/kikumo/dualchan-api
+Total : 21 files,  4255 codes, 548 comments, 175 blanks, all 4978 lines
+
+Languages
++--------------------+------------+------------+------------+------------+------------+
+| language           | files      | code       | comment    | blank      | total      |
++--------------------+------------+------------+------------+------------+------------+
+| JSON               |          3 |      3,557 |          0 |          3 |      3,560 |
+| TypeScript         |         15 |        604 |        458 |        137 |      1,199 |
+| Markdown           |          1 |         51 |          0 |         26 |         77 |
+| Properties         |          1 |         32 |          0 |          0 |         32 |
+| JSON with Comments |          1 |         11 |         90 |          9 |        110 |
++--------------------+------------+------------+------------+------------+------------+
+
+Directories
++-----------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                              | files      | code       | comment    | blank      | total      |
++-----------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                 |         21 |      4,255 |        548 |        175 |      4,978 |
+| . (Files)                                                                         |          6 |      3,651 |         90 |         38 |      3,779 |
+| src                                                                               |         15 |        604 |        458 |        137 |      1,199 |
+| src (Files)                                                                       |          1 |         68 |         47 |         12 |        127 |
+| src/auth                                                                          |          2 |         41 |         28 |         11 |         80 |
+| src/board                                                                         |          3 |        142 |        107 |         32 |        281 |
+| src/comment                                                                       |          3 |        130 |        106 |         28 |        264 |
+| src/generic                                                                       |          2 |         15 |         16 |          5 |         36 |
+| src/lib                                                                           |          1 |          8 |          2 |          3 |         13 |
+| src/lib/firebase                                                                  |          1 |          8 |          2 |          3 |         13 |
+| src/user                                                                          |          3 |        200 |        152 |         46 |        398 |
++-----------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++-----------------------------------------------------------------------------------+--------------------+------------+------------+------------+------------+
+| filename                                                                          | language           | code       | comment    | blank      | total      |
++-----------------------------------------------------------------------------------+--------------------+------------+------------+------------+------------+
+| /Users/timwestphal/kikumo seite/kikumo/dualchan-api/.env                          | Properties         |         32 |          0 |          0 |         32 |
+| /Users/timwestphal/kikumo seite/kikumo/dualchan-api/README.md                     | Markdown           |         51 |          0 |         26 |         77 |
+| /Users/timwestphal/kikumo seite/kikumo/dualchan-api/firebase_auth.json            | JSON               |         13 |          0 |          1 |         14 |
+| /Users/timwestphal/kikumo seite/kikumo/dualchan-api/package-lock.json             | JSON               |      3,508 |          0 |          1 |      3,509 |
+| /Users/timwestphal/kikumo seite/kikumo/dualchan-api/package.json                  | JSON               |         36 |          0 |          1 |         37 |
+| /Users/timwestphal/kikumo seite/kikumo/dualchan-api/src/auth/Auth.ts              | TypeScript         |         10 |          9 |          4 |         23 |
+| /Users/timwestphal/kikumo seite/kikumo/dualchan-api/src/auth/AuthHandler.ts       | TypeScript         |         31 |         19 |          7 |         57 |
+| /Users/timwestphal/kikumo seite/kikumo/dualchan-api/src/board/Board.ts            | TypeScript         |         10 |         16 |          5 |         31 |
+| /Users/timwestphal/kikumo seite/kikumo/dualchan-api/src/board/BoardService.ts     | TypeScript         |         84 |         48 |         17 |        149 |
+| /Users/timwestphal/kikumo seite/kikumo/dualchan-api/src/board/boardHandler.ts     | TypeScript         |         48 |         43 |         10 |        101 |
+| /Users/timwestphal/kikumo seite/kikumo/dualchan-api/src/comment/Comment.ts        | TypeScript         |         11 |         18 |          5 |         34 |
+| /Users/timwestphal/kikumo seite/kikumo/dualchan-api/src/comment/CommentService.ts | TypeScript         |         71 |         46 |         13 |        130 |
+| /Users/timwestphal/kikumo seite/kikumo/dualchan-api/src/comment/commentHandler.ts | TypeScript         |         48 |         42 |         10 |        100 |
+| /Users/timwestphal/kikumo seite/kikumo/dualchan-api/src/generic/Id.ts             | TypeScript         |          4 |          4 |          2 |         10 |
+| /Users/timwestphal/kikumo seite/kikumo/dualchan-api/src/generic/Pagination.ts     | TypeScript         |         11 |         12 |          3 |         26 |
+| /Users/timwestphal/kikumo seite/kikumo/dualchan-api/src/index.ts                  | TypeScript         |         68 |         47 |         12 |        127 |
+| /Users/timwestphal/kikumo seite/kikumo/dualchan-api/src/lib/firebase/db.ts        | TypeScript         |          8 |          2 |          3 |         13 |
+| /Users/timwestphal/kikumo seite/kikumo/dualchan-api/src/user/User.ts              | TypeScript         |         12 |         26 |          7 |         45 |
+| /Users/timwestphal/kikumo seite/kikumo/dualchan-api/src/user/UserHandler.ts       | TypeScript         |        100 |         69 |         23 |        192 |
+| /Users/timwestphal/kikumo seite/kikumo/dualchan-api/src/user/UserService.ts       | TypeScript         |         88 |         57 |         16 |        161 |
+| /Users/timwestphal/kikumo seite/kikumo/dualchan-api/tsconfig.json                 | JSON with Comments |         11 |         90 |          9 |        110 |
+| Total                                                                             |                    |      4,255 |        548 |        175 |      4,978 |
++-----------------------------------------------------------------------------------+--------------------+------------+------------+------------+------------+

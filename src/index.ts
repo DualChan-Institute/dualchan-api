@@ -46,6 +46,8 @@ import {
   loginUser,
   registerUser,
 } from './user/UserHandler';
+import {createUser, findUser, findUsers} from './user/UserService';
+import {UserZ} from './user/User';
 
 /**
  * Initialisiert das Fastify-Server-Objekt für die DualChan-API.

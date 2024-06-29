@@ -80,9 +80,13 @@ export async function authenticateUser({
     throw new Error('No JWT secret provided');
   }
 
-  const token = jwt.sign({id: user.id, email: user.email}, JWT_SECRET, {
-    expiresIn: '1h',
-  });
+  const token = jwt.sign(
+    {id: user.id, email: user.email, username: user.username},
+    JWT_SECRET,
+    {
+      expiresIn: '6h',
+    },
+  );
 
   return {token};
 }
